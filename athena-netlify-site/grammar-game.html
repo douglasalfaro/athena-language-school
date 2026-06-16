@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>文法小遊戲 | 雅喜娜美語補習班 Athena Language School</title>
+<style>
+  :root{
+    --brand:#2f5fae;
+    --brand-dark:#21437d;
+    --accent:#ff9f1c;
+    --accent-dark:#f08a00;
+    --good:#2ec27e;
+    --bad:#e5484d;
+    --slot:#eef3fb;
+    --ink:#27324a;
+    --paper:#ffffff;
+    --bg1:#dff0ff;
+    --bg2:#fff4e0;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    padding:18px 14px 40px;
+  }
+
+  /* ---------- Header ---------- */
+  header{width:100%;max-width:760px;text-align:center;margin-bottom:14px;}
+  .logo-link{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+    margin-bottom:4px;transition:opacity .15s;
+  }
+  .logo-link:hover{opacity:0.82;}
+  .logo-link svg{height:42px;width:42px;flex-shrink:0;}
+  .logo-link-text{
+    display:flex;flex-direction:column;line-height:1.18;text-align:left;
+  }
+  .logo-link-text .name{font-weight:900;font-size:1rem;color:var(--brand-dark);}
+  .logo-link-text .sub{font-weight:800;font-size:0.7rem;color:var(--accent);}
+  header h1{
+    font-size:clamp(22px,5vw,32px);margin:2px 0 2px;color:var(--brand-dark);
+  }
+  header p{margin:0;color:#5a6b8c;font-size:14px;}
+  .scoreboard{
+    display:inline-flex;gap:18px;align-items:center;
+    background:var(--paper);border-radius:999px;padding:8px 20px;margin-top:12px;
+    box-shadow:0 6px 18px rgba(47,95,174,.15);font-weight:700;
+  }
+  .scoreboard .stars{color:var(--accent-dark);}
+  .scoreboard .lvl{color:var(--brand);}
+
+  /* ---------- Card ---------- */
+  .card{
+    width:100%;max-width:760px;background:var(--paper);border-radius:24px;
+    box-shadow:0 18px 50px rgba(33,67,125,.18);padding:24px 22px 28px;
+  }
+  .hint{
+    background:var(--bg2);border-radius:14px;padding:12px 16px;margin-bottom:16px;
+    font-size:15px;color:#7a5a18;display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  }
+  .hint b{color:#b06d00;}
+  .hint-tools{display:flex;gap:6px;margin-left:auto;flex-shrink:0;align-items:center;}
+
+  .menu-btn{
+    background:none;border:2px solid #d8c080;border-radius:10px;
+    font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;color:#8a6d30;
+    font-weight:700;font-family:inherit;
+    transition:background .15s;
+  }
+  .menu-btn:hover{background:rgba(255,159,28,.18);}
+  .menu-btn:active{background:rgba(255,159,28,.35);}
+
+  .home-btn{
+    background:none;border:2px solid var(--brand);border-radius:10px;
+    font-size:16px;cursor:pointer;padding:4px 10px;line-height:1;color:var(--brand);
+    font-weight:700;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:3px;
+    transition:background .15s;
+  }
+  .home-btn:hover{background:rgba(47,95,174,.12);}
+  .home-btn:active{background:rgba(47,95,174,.25);}
+
+  .speak-btn{
+    background:none;border:2px solid #d8c080;border-radius:10px;
+    font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;
+    transition:background .15s;
+  }
+  .speak-btn:hover{background:rgba(255,159,28,.18);}
+  .speak-btn:active{background:rgba(255,159,28,.35);}
+
+  .label{font-size:13px;color:#8a96ad;font-weight:700;letter-spacing:.5px;margin:0 0 8px;}
+
+  /* answer area */
+  .answer{
+    min-height:74px;border:2px dashed #c4d3ee;border-radius:16px;background:var(--slot);
+    padding:12px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;
+    transition:border-color .2s,background .2s;
+    position:relative;
+  }
+  .answer.empty::before{
+    content:"點下面的單字，把句子排好 👇";color:#9fb0cf;font-size:14px;align-self:center;margin:auto;
+  }
+  .answer.correct{border-color:var(--good);background:#e9faf2;}
+  .answer.wrong{border-color:var(--bad);background:#fdecec;animation:shake .4s;}
+  .answer.drag-over{border-color:var(--accent);background:#fff8ed;border-style:solid;}
+
+  /* word bank */
+  .bank{
+    margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;min-height:58px;
+    border-radius:16px;transition:background .2s;
+  }
+  .bank.drag-over{background:rgba(255,159,28,.08);}
+
+  .tile{
+    font-size:clamp(16px,3.6vw,20px);font-weight:700;color:var(--ink);
+    background:#fff;border:2px solid #d8e2f4;border-radius:12px;
+    padding:10px 16px;cursor:pointer;user-select:none;
+    box-shadow:0 4px 0 #d8e2f4;transition:transform .08s,box-shadow .08s,opacity .2s;
+    touch-action:manipulation;
+  }
+  .tile:active{transform:translateY(3px);box-shadow:0 1px 0 #d8e2f4;}
+  .tile.in-answer{background:#eaf1ff;border-color:var(--brand);box-shadow:0 4px 0 #b9cdf0;}
+  .tile.used{opacity:0;pointer-events:none;width:0;padding:0;margin:0;border:0;overflow:hidden;}
+  .tile.dragging{opacity:0.45;}
+
+  /* buttons */
+  .actions{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;}
+  button.btn{
+    flex:1;min-width:120px;border:0;border-radius:14px;padding:14px 18px;
+    font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;
+    transition:transform .08s,filter .15s;
+  }
+  button.btn:active{transform:translateY(2px);}
+  .btn-check{background:var(--good);color:#fff;box-shadow:0 5px 0 #229b63;}
+  .btn-reset{background:#eef1f6;color:#6b7790;box-shadow:0 5px 0 #d4dae6;flex:0 0 auto;min-width:90px;}
+  .btn-next{background:var(--accent);color:#fff;box-shadow:0 5px 0 var(--accent-dark);}
+
+  .feedback{margin-top:16px;text-align:center;font-size:18px;font-weight:800;min-height:26px;}
+  .feedback.win{color:var(--good);}
+  .feedback.lose{color:var(--bad);}
+
+  .translation{margin-top:6px;text-align:center;color:#8a96ad;font-size:14px;}
+
+  /* finish screen */
+  .finish{text-align:center;padding:10px 4px;}
+  .finish .big{font-size:60px;}
+  .finish h2{color:var(--brand-dark);margin:10px 0 6px;}
+  .finish p{color:#5a6b8c;margin:0 0 18px;}
+
+  /* star burst */
+  .burst{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
+  .star{position:absolute;font-size:26px;animation:fall 1.4s ease-in forwards;}
+
+  /* drag clone */
+  .drag-clone{
+    position:fixed;z-index:1000;pointer-events:none;opacity:0.92;
+    transform:scale(1.08);box-shadow:0 12px 32px rgba(0,0,0,0.22) !important;
+    border-color:var(--accent) !important;background:#fff;
+  }
+
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  @keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
+  @keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .pop{animation:pop .3s ease-out;}
+
+  /* start screen difficulty buttons */
+  .diff-btns{display:flex;flex-direction:column;gap:12px;max-width:280px;margin:0 auto;}
+  .diff-btn{font-size:18px;line-height:1.4;padding:16px 20px;border:0;border-radius:14px;
+    cursor:pointer;font-family:inherit;font-weight:800;transition:transform .08s;}
+  .diff-btn:active{transform:translateY(2px);}
+  .diff-btn small{display:block;font-size:13px;opacity:0.85;font-weight:600;}
+  .diff-easy{background:var(--good);color:#fff;box-shadow:0 5px 0 #229b63;}
+  .diff-medium{background:var(--accent);color:#fff;box-shadow:0 5px 0 var(--accent-dark);}
+  .diff-hard{background:var(--brand);color:#fff;box-shadow:0 5px 0 var(--brand-dark);}
+
+  footer{margin-top:22px;color:#8295b5;font-size:12px;text-align:center;}
+</style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link" title="回首頁">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FF6B2B"/><stop offset="100%" stop-color="#FF9A5C"/></linearGradient>
+          <linearGradient id="nb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3B5BDB"/><stop offset="100%" stop-color="#2244BB"/></linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="48" fill="url(#ng)"/>
+        <g transform="translate(-8 -8) scale(1.16)">
+        <ellipse cx="35" cy="62" rx="14" ry="8" fill="url(#nb)" transform="rotate(-30 35 62)"/>
+        <ellipse cx="65" cy="62" rx="14" ry="8" fill="url(#nb)" transform="rotate(30 65 62)"/>
+        <ellipse cx="50" cy="65" rx="18" ry="22" fill="url(#nb)"/>
+        <ellipse cx="50" cy="71" rx="11" ry="14" fill="white" opacity="0.18"/>
+        <polygon points="42,32 38,22 46,28" fill="url(#nb)"/>
+        <polygon points="58,32 62,22 54,28" fill="url(#nb)"/>
+        <ellipse cx="50" cy="42" rx="17" ry="15" fill="url(#nb)"/>
+        <ellipse cx="43" cy="40" rx="5" ry="5" fill="white"/>
+        <ellipse cx="57" cy="40" rx="5" ry="5" fill="white"/>
+        <circle cx="43" cy="40" r="3.5" fill="#FFD43B"/>
+        <circle cx="57" cy="40" r="3.5" fill="#FFD43B"/>
+        <circle cx="43.5" cy="40" r="2" fill="#1A1A2E"/>
+        <circle cx="57.5" cy="40" r="2" fill="#1A1A2E"/>
+        <circle cx="44.5" cy="39" r="0.8" fill="white"/>
+        <circle cx="58.5" cy="39" r="0.8" fill="white"/>
+        <polygon points="50,46 47,51 53,51" fill="#FFD43B"/>
+        <rect x="41" y="26" width="18" height="3" rx="1" fill="#FFD43B"/>
+        <polygon points="50,19 60,26 40,26" fill="#FFD43B"/>
+        </g>
+      </svg>
+      <span class="logo-link-text">
+        <span class="name">雅喜娜美語補習班</span>
+        <span class="sub">Athena Language School</span>
+      </span>
+    </a>
+    <h1>🌟 文法小遊戲 Grammar Game</h1>
+    <p>把打散的單字排成正確的英文句子，完成就能得到一顆星星！</p>
+    <div class="scoreboard" id="scoreboard">
+      <span class="lvl">第 <span id="lvlNow">1</span> / <span id="lvlTotal">8</span> 題</span>
+      <span class="stars">⭐ <span id="starCount">0</span></span>
+    </div>
+  </header>
+
+  <!-- START SCREEN -->
+  <div class="card" id="startScreen" style="display:block;">
+    <div class="finish">
+      <div class="big">🎮</div>
+      <h2>選擇難度</h2>
+      <p>選一個等級開始練習英文文法吧！</p>
+      <div class="diff-btns">
+        <button class="btn diff-btn diff-easy" data-diff="easy">🌱 簡單 Easy<br><small>4–5 個單字</small></button>
+        <button class="btn diff-btn diff-medium" data-diff="medium">🌿 中等 Medium<br><small>5–7 個單字</small></button>
+        <button class="btn diff-btn diff-hard" data-diff="hard">🌳 困難 Hard<br><small>7–10 個單字</small></button>
+      </div>
+      <a href="index.html" class="home-btn" style="margin-top:20px;display:inline-flex;">🏠 回首頁</a>
+    </div>
+  </div>
+
+  <!-- GAME CARD (hidden until difficulty selected) -->
+  <div class="card" id="gameCard" style="display:none;">
+    <div class="hint">
+      💡 <span>中文提示：<b id="hintText"></b></span>
+      <span class="hint-tools">
+        <a href="index.html" class="home-btn" title="回首頁">🏠 回首頁</a>
+        <button class="menu-btn" id="menuBtn" title="換難度">↩ 換難度</button>
+        <button class="speak-btn" id="speakBtn" title="聽發音">🔊</button>
+      </span>
+    </div>
+
+    <p class="label">你的句子 YOUR SENTENCE <span style="font-weight:400;font-size:12px;color:#bcc6d6;">（點選或拖曳單字）</span></p>
+    <div class="answer empty" id="answer"></div>
+
+    <p class="label" style="margin-top:18px;">點選單字 TAP THE WORDS</p>
+    <div class="bank" id="bank"></div>
+
+    <div class="actions">
+      <button class="btn btn-reset" id="resetBtn">↺ 重來</button>
+      <button class="btn btn-check" id="checkBtn">檢查 Check ✓</button>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+    <div class="translation" id="translation"></div>
+  </div>
+
+  <div class="burst" id="burst"></div>
+
+  <footer>雅喜娜美語補習班 · Athena Language School</footer>
+
+<script>
+/* ---------- Sentences by difficulty ---------- */
+const ALL_SENTENCES = {
+  easy: [
+    { words:["a","I","have","cat"],                         answer:["I","have","a","cat"],                         zh:"我有一隻貓。" },
+    { words:["is","dog","The","happy"],                     answer:["The","dog","is","happy"],                     zh:"那隻狗很開心。" },
+    { words:["like","We","apples","red"],                   answer:["We","like","red","apples"],                   zh:"我們喜歡紅蘋果。" },
+    { words:["to","goes","She","school"],                   answer:["She","goes","to","school"],                   zh:"她去上學。" },
+    { words:["He","friend","is","my"],                      answer:["He","is","my","friend"],                      zh:"他是我的朋友。" },
+    { words:["a","I","bird","see"],                         answer:["I","see","a","bird"],                         zh:"我看到一隻鳥。" },
+    { words:["big","sun","is","The"],                       answer:["The","sun","is","big"],                       zh:"太陽很大。" },
+    { words:["eating","are","They","lunch"],                answer:["They","are","eating","lunch"],                zh:"他們正在吃午餐。" },
+  ],
+  medium: [
+    { words:["are","books","on","the","table","The"],       answer:["The","books","are","on","the","table"],       zh:"那些書在桌上。" },
+    { words:["plays","He","soccer","park","the","in"],      answer:["He","plays","soccer","in","the","park"],      zh:"他在公園踢足球。" },
+    { words:["my","is","teacher","kind","very"],            answer:["My","teacher","is","very","kind"],            zh:"我的老師非常和善。" },
+    { words:["the","reading","are","children","a","story"], answer:["The","children","are","reading","a","story"], zh:"孩子們正在讀一個故事。" },
+    { words:["drinking","cup","She","is","tea","a","of"],   answer:["She","is","drinking","a","cup","of","tea"],   zh:"她正在喝一杯茶。" },
+    { words:["park","go","We","every","the","Sunday","to"], answer:["We","go","to","the","park","every","Sunday"], zh:"我們每個星期日去公園。" },
+    { words:["a","He","the","writing","letter","is"],       answer:["He","is","writing","a","letter"],             zh:"他正在寫一封信。" },
+    { words:["watching","The","TV","family","is"],          answer:["The","family","is","watching","TV"],          zh:"全家人正在看電視。" },
+  ],
+  hard: [
+    { words:["a","is","big","garden","There","tree","the","in"],           answer:["There","is","a","big","tree","in","the","garden"],           zh:"花園裡有一棵大樹。" },
+    { words:["dinner","is","mother","cooking","the","kitchen","in","My"],  answer:["My","mother","is","cooking","dinner","in","the","kitchen"],  zh:"我媽媽正在廚房煮晚餐。" },
+    { words:["a","students","writing","in","test","the","are","The","classroom"], answer:["The","students","are","writing","a","test","in","the","classroom"], zh:"學生們正在教室裡寫考卷。" },
+    { words:["always","bike","his","school","He","rides","to","morning","the","in"], answer:["He","always","rides","his","bike","to","school","in","the","morning"], zh:"他早上總是騎腳踏車上學。" },
+    { words:["girl","with","The","playing","new","little","is","her","doll"], answer:["The","little","girl","is","playing","with","her","new","doll"], zh:"小女孩正在玩她的新洋娃娃。" },
+    { words:["to","They","grandparents","their","going","are","house"],    answer:["They","are","going","to","their","grandparents","house"],    zh:"他們正要去祖父母家。" },
+    { words:["on","sleeping","The","sofa","the","cat","is"],               answer:["The","cat","is","sleeping","on","the","sofa"],               zh:"那隻貓正在沙發上睡覺。" },
+    { words:["water","We","fresh","drinking","are","juice","orange"],      answer:["We","are","drinking","fresh","orange","juice"],              zh:"我們正在喝新鮮柳橙汁。" },
+  ],
+};
+
+const DIFF_LABELS = { easy:"簡單 Easy", medium:"中等 Medium", hard:"困難 Hard" };
+
+let SENTENCES = [];
+let currentDiff = '';
+let idx = 0;
+let stars = 0;
+
+const startScreen = document.getElementById('startScreen');
+const gameCard    = document.getElementById('gameCard');
+const scoreboard  = document.getElementById('scoreboard');
+const bankEl      = document.getElementById('bank');
+const answerEl    = document.getElementById('answer');
+const hintEl      = document.getElementById('hintText');
+const fbEl        = document.getElementById('feedback');
+const transEl     = document.getElementById('translation');
+const checkBtn    = document.getElementById('checkBtn');
+const resetBtn    = document.getElementById('resetBtn');
+const speakBtn    = document.getElementById('speakBtn');
+const menuBtn     = document.getElementById('menuBtn');
+
+/* ---------- Back to menu ---------- */
+function backToMenu(){
+  speechSynthesis.cancel();
+  startScreen.style.display = 'block';
+  gameCard.style.display = 'none';
+  scoreboard.style.display = 'none';
+}
+menuBtn.addEventListener('click', backToMenu);
+
+/* ---------- Difficulty selection ---------- */
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentDiff = btn.dataset.diff;
+    SENTENCES = ALL_SENTENCES[currentDiff];
+    startScreen.style.display = 'none';
+    gameCard.style.display = 'block';
+    scoreboard.style.display = 'inline-flex';
+    document.getElementById('lvlTotal').textContent = SENTENCES.length;
+    document.getElementById('starCount').textContent = '0';
+    idx = 0; stars = 0;
+    loadLevel();
+  });
+});
+
+/* ---------- Speak aloud ---------- */
+speakBtn.addEventListener('click', () => {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const sentence = SENTENCES[idx].answer.join(' ');
+  const utter = new SpeechSynthesisUtterance(sentence);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  speechSynthesis.speak(utter);
+});
+
+function loadLevel(){
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  const s = SENTENCES[idx];
+  document.getElementById('lvlNow').textContent = idx + 1;
+  hintEl.textContent = s.zh;
+  fbEl.textContent = ''; fbEl.className = 'feedback';
+  transEl.textContent = '';
+  answerEl.innerHTML = '';
+  answerEl.className = 'answer empty';
+  bankEl.innerHTML = '';
+  checkBtn.disabled = false;
+
+  s.words.forEach((w, i) => {
+    const t = document.createElement('div');
+    t.className = 'tile';
+    t.textContent = w;
+    t.dataset.id = i;
+    t.draggable = true;
+    t.addEventListener('click', () => toAnswer(t));
+    t.addEventListener('dragstart', onDragStart);
+    t.addEventListener('dragend', onDragEnd);
+    bankEl.appendChild(t);
+  });
+}
+
+/* ============ tap to select ============ */
+function toAnswer(tile){
+  if(tile.classList.contains('used')) return;
+  const clone = tile.cloneNode(true);
+  clone.className = 'tile in-answer pop';
+  clone.draggable = true;
+  clone.addEventListener('click', () => answerToBank(clone));
+  clone.addEventListener('dragstart', onAnswerDragStart);
+  clone.addEventListener('dragend', onDragEnd);
+  answerEl.appendChild(clone);
+  tile.classList.add('used');
+  tile.draggable = false;
+  refreshState();
+}
+
+function answerToBank(tileEl){
+  const word = tileEl.textContent;
+  // find the hidden bank tile
+  const hidden = [...bankEl.children].find(c => c.textContent === word && c.classList.contains('used'));
+  if(hidden){
+    hidden.classList.remove('used');
+    hidden.draggable = true;
+  }
+  tileEl.remove();
+  refreshState();
+}
+
+function refreshState(){
+  answerEl.classList.toggle('empty', answerEl.children.length === 0);
+  answerEl.classList.remove('correct','wrong');
+}
+
+function currentAnswer(){
+  return [...answerEl.children].map(c => c.textContent);
+}
+
+/* ============ drag and drop ============ */
+let dragSource = null;  // 'bank' | 'answer'
+let dragOrigTile = null;
+
+function onDragStart(e){
+  dragSource = 'bank';
+  dragOrigTile = this;
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', this.textContent);
+}
+
+function onAnswerDragStart(e){
+  dragSource = 'answer';
+  dragOrigTile = this;
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', this.textContent);
+}
+
+function onDragEnd(e){
+  this.classList.remove('dragging');
+  dragSource = null;
+  dragOrigTile = null;
+  answerEl.classList.remove('drag-over');
+  bankEl.classList.remove('drag-over');
+}
+
+// answer area as drop target
+answerEl.addEventListener('dragover', function(e){
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  this.classList.add('drag-over');
+});
+answerEl.addEventListener('dragleave', function(){
+  this.classList.remove('drag-over');
+});
+answerEl.addEventListener('drop', function(e){
+  e.preventDefault();
+  this.classList.remove('drag-over');
+  if(dragSource === 'bank' && dragOrigTile && !dragOrigTile.classList.contains('used')){
+    toAnswer(dragOrigTile);
+  }
+});
+
+// bank as drop target (return tiles from answer)
+bankEl.addEventListener('dragover', function(e){
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  this.classList.add('drag-over');
+});
+bankEl.addEventListener('dragleave', function(){
+  this.classList.remove('drag-over');
+});
+bankEl.addEventListener('drop', function(e){
+  e.preventDefault();
+  this.classList.remove('drag-over');
+  if(dragSource === 'answer' && dragOrigTile){
+    answerToBank(dragOrigTile);
+  }
+});
+
+/* ============ touch drag (mobile) ============ */
+let touchDragTile = null;
+let touchClone = null;
+let touchSource = null; // 'bank' | 'answer'
+let touchStartX = 0, touchStartY = 0;
+let touchMoved = false;
+
+document.addEventListener('touchstart', function(e){
+  const tile = e.target.closest('.tile');
+  if(!tile || tile.classList.contains('used') || tile.classList.contains('dragging')) return;
+
+  const t = e.touches[0];
+  touchStartX = t.clientX;
+  touchStartY = t.clientY;
+  touchDragTile = tile;
+  touchSource = tile.parentElement === bankEl ? 'bank' : 'answer';
+  touchMoved = false;
+}, {passive: true});
+
+document.addEventListener('touchmove', function(e){
+  if(!touchDragTile) return;
+  const t = e.touches[0];
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+
+  if(!touchMoved && (Math.abs(dx) > 6 || Math.abs(dy) > 6)){
+    touchMoved = true;
+    e.preventDefault();
+    // create visual clone
+    touchClone = document.createElement('div');
+    touchClone.className = 'tile drag-clone';
+    touchClone.textContent = touchDragTile.textContent;
+    touchClone.style.width = touchDragTile.offsetWidth + 'px';
+    document.body.appendChild(touchClone);
+    touchDragTile.classList.add('dragging');
+  }
+  if(touchClone){
+    e.preventDefault();
+    touchClone.style.left = (t.clientX - touchClone.offsetWidth/2) + 'px';
+    touchClone.style.top  = (t.clientY - touchClone.offsetHeight/2) + 'px';
+
+    // highlight drop zones — hide clone so elementFromPoint sees through
+    touchClone.style.display = 'none';
+    const elUnder = document.elementFromPoint(t.clientX, t.clientY);
+    touchClone.style.display = '';
+    answerEl.classList.toggle('drag-over', !!(elUnder && (answerEl.contains(elUnder) || elUnder === answerEl)));
+    bankEl.classList.toggle('drag-over', !!(elUnder && (bankEl.contains(elUnder) || elUnder === bankEl)));
+  }
+}, {passive: false});
+
+document.addEventListener('touchend', function(e){
+  if(!touchDragTile) return;
+
+  if(touchClone){
+    const t = e.changedTouches[0];
+    // hide clone so elementFromPoint sees through to drop zones below
+    touchClone.style.display = 'none';
+    const elUnder = document.elementFromPoint(t.clientX, t.clientY);
+    touchClone.style.display = '';
+
+    if(elUnder && (answerEl.contains(elUnder) || elUnder === answerEl)){
+      if(touchSource === 'bank' && !touchDragTile.classList.contains('used')){
+        toAnswer(touchDragTile);
+      }
+    } else if(elUnder && (bankEl.contains(elUnder) || elUnder === bankEl)){
+      if(touchSource === 'answer'){
+        answerToBank(touchDragTile);
+      }
+    }
+    touchClone.remove();
+    touchClone = null;
+    answerEl.classList.remove('drag-over');
+    bankEl.classList.remove('drag-over');
+  } else if(!touchMoved){
+    // it was a tap (no movement) — handled by click event
+  }
+
+  if(touchDragTile){
+    touchDragTile.classList.remove('dragging');
+  }
+  touchDragTile = null;
+  touchSource = null;
+  touchMoved = false;
+});
+
+/* ============ game logic ============ */
+checkBtn.addEventListener('click', () => {
+  const guess = currentAnswer();
+  const correct = SENTENCES[idx].answer;
+  if(guess.length === 0) return;
+  const ok = guess.length === correct.length && guess.every((w,i) => w === correct[i]);
+  if(ok){
+    answerEl.classList.add('correct');
+    stars++;
+    document.getElementById('starCount').textContent = stars;
+    fbEl.textContent = '🎉 太棒了！正確！ Great job!';
+    fbEl.className = 'feedback win';
+    transEl.textContent = '「' + SENTENCES[idx].zh + '」';
+    checkBtn.disabled = true;
+    starBurst();
+    showNext();
+  } else {
+    answerEl.classList.remove('wrong'); void answerEl.offsetWidth;
+    answerEl.classList.add('wrong');
+    fbEl.textContent = '再試一次！ Try again 💪';
+    fbEl.className = 'feedback lose';
+  }
+});
+
+resetBtn.addEventListener('click', loadLevel);
+
+function showNext(){
+  let next = document.getElementById('nextBtn');
+  if(next) next.remove();
+  next = document.createElement('button');
+  next.id = 'nextBtn';
+  next.className = 'btn btn-next';
+  next.style.flex = '1';
+  next.textContent = (idx + 1 < SENTENCES.length) ? '下一題 Next →' : '看成績 Finish 🏆';
+  next.addEventListener('click', () => {
+    next.remove();
+    if(idx + 1 < SENTENCES.length){ idx++; loadLevel(); }
+    else finish();
+  });
+  document.querySelector('#gameCard .actions').appendChild(next);
+}
+
+function finish(){
+  const max = SENTENCES.length;
+  let msg = (stars === max) ? '完美！你是文法高手！ Perfect!' :
+            (stars >= max*0.6) ? '做得很好，繼續加油！ Well done!' :
+            '很好的開始，再練習一次吧！ Keep practicing!';
+  gameCard.innerHTML =
+    '<div class="finish">' +
+      '<div class="big">🏆</div>' +
+      '<h2>你得到 ' + stars + ' / ' + max + ' 顆星星！</h2>' +
+      '<p>' + msg + '</p>' +
+      '<button class="btn btn-next" style="flex:1;max-width:240px;margin:auto;margin-bottom:12px;" onclick="location.reload()">再玩一次 Play again 🔁</button>' +
+      '<br><button class="btn btn-reset" style="flex:0 auto;min-width:auto;padding:10px 20px;font-size:15px;margin-top:6px;" onclick="location.reload()">換難度 Choose level 🔄</button>' +
+      '<br><a href="index.html" class="home-btn" style="margin-top:14px;display:inline-flex;">🏠 回首頁</a>' +
+    '</div>';
+  bigStarBurst();
+}
+
+/* ---------- star animations ---------- */
+function starBurst(){ for(let i=0;i<14;i++) makeStar(); }
+function bigStarBurst(){ for(let i=0;i<40;i++) makeStar(); }
+function makeStar(){
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.textContent = ['⭐','🌟','✨'][Math.floor(Math.random()*3)];
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.fontSize = (18 + Math.random()*22) + 'px';
+  s.style.animationDuration = (1 + Math.random()*1.2) + 's';
+  document.getElementById('burst').appendChild(s);
+  setTimeout(() => s.remove(), 2400);
+}
+</script>
+</body>
+</html>

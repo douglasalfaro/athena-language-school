@@ -1,0 +1,6 @@
+.DS_Store
+.qwen/
+.claude/
+netlify-deploy/
+athena-netlify-site.zip
+*.pdf
