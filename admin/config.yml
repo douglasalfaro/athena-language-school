@@ -5,6 +5,15 @@ backend:
 media_folder: "assets"
 public_folder: "assets"
 
+# Athena School branding
+logo_url: "../assets/favicon.svg"
+display_url: "https://123athena.com"
+site_url: "https://123athena.com"
+
+# Custom styling
+show_preview_links: true
+locale: "zh_Hant"
+
 collections:
   - name: "hero"
     label: "首頁主視覺"
