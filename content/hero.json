@@ -1,0 +1,17 @@
+{
+  "tag": "🎉 新莊在地深耕 10 年以上",
+  "title": "讓孩子愛上<br>說 <span>English</span>！",
+  "subtitle": "雅喜娜美語補習班，位於新北市新莊區，<br>以溫暖、活潑的教學方式，培養孩子自信開口的英語力。",
+  "highlights": [
+    { "emoji": "🎯", "label": "全美語教學" },
+    { "emoji": "🏆", "label": "深受家長信賴" },
+    { "emoji": "✈️", "label": "外籍師資" },
+    { "emoji": "🎨", "label": "趣味教學" }
+  ],
+  "photos": [
+    { "src": "assets/hero-halloween-group.jpg", "alt": "雅喜娜學生萬聖節活動合照", "badge": "🎃 節慶活動", "caption": "雅喜娜萬聖節活動合照" },
+    { "src": "assets/hero-classroom-teacher.jpg", "alt": "外籍老師與學生上課互動", "badge": "📚 課堂互動", "caption": "外籍老師與孩子們的課堂互動" },
+    { "src": "assets/hero-halloween-party.jpg", "alt": "學生萬聖節裝扮活動", "badge": "🎉 快樂學習", "caption": "在活動中自然使用英語" },
+    { "src": "assets/hero-classroom-students.jpg", "alt": "雅喜娜學生在教室學習英文", "badge": "✏️ 小班教學", "caption": "小班制教室學習環境" }
+  ]
+}

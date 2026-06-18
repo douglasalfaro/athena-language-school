@@ -320,15 +320,15 @@
 <!-- HERO with PHOTOS -->
 <section id="hero">
   <div class="hero-content">
-    <div class="hero-tag">🎉 新莊在地深耕 10 年以上</div>
-    <h1 class="hero-title">讓孩子愛上<br>說 <span>English</span>！</h1>
-    <p class="hero-sub">雅喜娜美語補習班，位於新北市新莊區，<br>以溫暖、活潑的教學方式，培養孩子自信開口的英語力。</p>
+    <div class="hero-tag" data-content="hero.tag">🎉 新莊在地深耕 10 年以上</div>
+    <h1 class="hero-title" data-content="hero.title">讓孩子愛上<br>說 <span>English</span>！</h1>
+    <p class="hero-sub" data-content="hero.subtitle">雅喜娜美語補習班，位於新北市新莊區，<br>以溫暖、活潑的教學方式，培養孩子自信開口的英語力。</p>
     <div class="hero-btns">
       <a href="#enrollment" class="btn-primary">🚀 免費試聽報名</a>
       <a href="#courses" class="btn-secondary">📚 查看課程</a>
       <a href="grammar-game.html" class="btn-game">練習你的英文文法 ✏️</a>
     </div>
-    <div class="hero-highlights" aria-label="學校特色">
+    <div class="hero-highlights" data-content="hero.highlights" aria-label="學校特色">
       <div class="hero-highlight-card"><span class="emoji">🎯</span><span class="label">全美語教學</span></div>
       <div class="hero-highlight-card"><span class="emoji">🏆</span><span class="label">深受家長信賴</span></div>
       <div class="hero-highlight-card"><span class="emoji">✈️</span><span class="label">外籍師資</span></div>
@@ -337,27 +337,8 @@
   </div>
 
   <!-- PHOTO COLLAGE RIGHT SIDE -->
-  <div class="hero-photos">
-    <div class="hero-photo" onclick="openLightbox(this)">
-      <img src="assets/hero-halloween-group.jpg" alt="雅喜娜學生萬聖節活動合照">
-      <div class="hero-photo-badge">🎃 節慶活動</div>
-      <div style="display:none" class="caption-text">雅喜娜萬聖節活動合照</div>
-    </div>
-    <div class="hero-photo" onclick="openLightbox(this)">
-      <img src="assets/hero-classroom-teacher.jpg" alt="外籍老師與學生上課互動">
-      <div class="hero-photo-badge">📚 課堂互動</div>
-      <div style="display:none" class="caption-text">外籍老師與孩子們的課堂互動</div>
-    </div>
-    <div class="hero-photo" onclick="openLightbox(this)">
-      <img src="assets/hero-halloween-party.jpg" alt="學生萬聖節裝扮活動">
-      <div class="hero-photo-badge">🎉 快樂學習</div>
-      <div style="display:none" class="caption-text">在活動中自然使用英語</div>
-    </div>
-    <div class="hero-photo" onclick="openLightbox(this)">
-      <img src="assets/hero-classroom-students.jpg" alt="雅喜娜學生在教室學習英文">
-      <div class="hero-photo-badge">✏️ 小班教學</div>
-      <div style="display:none" class="caption-text">小班制教室學習環境</div>
-    </div>
+  <div class="hero-photos" data-content="hero.photos">
+    <!-- Populated by content-loader.js from content/hero.json -->
   </div>
 
   <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" fill="white">
@@ -367,7 +348,7 @@
 
 <!-- STATS -->
 <section id="stats">
-  <div class="stats-grid">
+  <div class="stats-grid" data-content="contact.stats">
     <div class="reveal"><div class="stat-num">10+</div><div class="stat-label">年豐富教學經驗</div></div>
     <div class="reveal"><div class="stat-num">500+</div><div class="stat-label">畢業學員</div></div>
     <div class="reveal"><div class="stat-num">4</div><div class="stat-label">專業師資</div></div>
@@ -378,55 +359,35 @@
 <!-- FEATURES -->
 <section id="features">
   <div class="center">
-    <div class="section-tag">為什麼選擇我們</div>
-    <h2>溫暖、有趣、有效的英語教育</h2>
-    <p class="section-desc">我們相信每個孩子都有無限潛力，透過快樂學習，讓英語成為孩子最好的朋友。</p>
+    <div class="section-tag" data-content="features.section_tag">為什麼選擇我們</div>
+    <h2 data-content="features.section_title">溫暖、有趣、有效的英語教育</h2>
+    <p class="section-desc" data-content="features.section_desc">我們相信每個孩子都有無限潛力，透過快樂學習，讓英語成為孩子最好的朋友。</p>
   </div>
-  <div class="features-grid">
-    <div class="feature-card reveal"><span class="feature-icon">🌍</span><h3>沉浸式美語環境</h3><p>外籍與本籍雙師配合，創造真實的英語學習情境，讓孩子自然開口說英語。</p></div>
-    <div class="feature-card reveal"><span class="feature-icon">👨‍👩‍👧</span><h3>小班精緻教學</h3><p>每班人數嚴格控管，確保老師能給予每位學生最適切的個別指導與關注。</p></div>
-    <div class="feature-card reveal"><span class="feature-icon">🎮</span><h3>遊戲化學習設計</h3><p>融入互動遊戲、故事繪本與多媒體教材，讓學習充滿樂趣，孩子每天期待上課。</p></div>
-    <div class="feature-card reveal"><span class="feature-icon">📊</span><h3>定期學習回饋</h3><p>每月提供學習進度報告，家長隨時掌握孩子的學習狀況與成長喜悅。</p></div>
+  <div class="features-grid" data-content="features.items">
+    <!-- Populated by content-loader.js from content/features.json -->
   </div>
 </section>
 
 <!-- COURSES -->
 <section id="courses">
   <div class="courses-header">
-    <div><div class="section-tag">課程介紹</div><h2>為每個年齡量身打造</h2></div>
-    <p class="section-desc" style="max-width:320px">從幼兒到國中，完整的英語學習路徑，陪伴孩子每個成長階段。</p>
+    <div><div class="section-tag" data-content="courses.section_tag">課程介紹</div><h2 data-content="courses.section_title">為每個年齡量身打造</h2></div>
+    <p class="section-desc" style="max-width:320px" data-content="courses.section_desc">從幼兒到國中，完整的英語學習路徑，陪伴孩子每個成長階段。</p>
   </div>
-  <div class="courses-grid">
-    <div class="course-card reveal">
-      <div class="course-header"><span class="course-emoji">🐣</span><span class="course-age">4–6 歲</span><div class="course-title">幼兒美語班</div></div>
-      <div class="course-body"><p>透過歌謠、律動與繪本，建立幼兒的英語語感與學習熱情，打下快樂的英語基礎。</p><div class="course-tags"><span class="course-tag">歌謠律動</span><span class="course-tag">英語繪本</span><span class="course-tag">手工藝術</span></div></div>
-    </div>
-    <div class="course-card reveal">
-      <div class="course-header"><span class="course-emoji">📖</span><span class="course-age">國小低年級</span><div class="course-title">兒童英語基礎班</div></div>
-      <div class="course-body"><p>系統性學習自然發音法與基礎字彙，培養閱讀與拼字能力，增強課堂自信心。</p><div class="course-tags"><span class="course-tag">自然發音</span><span class="course-tag">基礎文法</span><span class="course-tag">故事閱讀</span></div></div>
-    </div>
-    <div class="course-card reveal">
-      <div class="course-header"><span class="course-emoji">🚀</span><span class="course-age">國小中高年級</span><div class="course-title">兒童英語進階班</div></div>
-      <div class="course-body"><p>強化聽說讀寫四大技能，導入英語會話情境訓練，為國中英語銜接做好萬全準備。</p><div class="course-tags"><span class="course-tag">會話訓練</span><span class="course-tag">寫作練習</span><span class="course-tag">銜接課程</span></div></div>
-    </div>
-    <div class="course-card reveal">
-      <div class="course-header"><span class="course-emoji">🎓</span><span class="course-age">國中生</span><div class="course-title">國中英語衝刺班</div></div>
-      <div class="course-body"><p>針對學校課程與會考，強化文法、閱讀理解與寫作，成績顯著提升，家長安心放心。</p><div class="course-tags"><span class="course-tag">文法衝刺</span><span class="course-tag">閱讀理解</span><span class="course-tag">會考準備</span></div></div>
-    </div>
+  <div class="courses-grid" data-content="courses.items">
+    <!-- Populated by content-loader.js from content/courses.json -->
   </div>
 </section>
 
 <!-- TEACHERS -->
 <section id="teachers">
   <div class="center">
-    <div class="section-tag blue">師資陣容</div>
-    <h2>充滿熱情的專業老師</h2>
-    <p class="section-desc">每位老師都經過嚴格篩選，不僅英語能力卓越，更擁有豐富的兒童教學經驗與滿滿的愛心。</p>
+    <div class="section-tag blue" data-content="teachers.section_tag">師資陣容</div>
+    <h2 data-content="teachers.section_title">充滿熱情的專業老師</h2>
+    <p class="section-desc" data-content="teachers.section_desc">每位老師都經過嚴格篩選，不僅英語能力卓越，更擁有豐富的兒童教學經驗與滿滿的愛心。</p>
   </div>
-  <div class="teachers-grid">
-    <div class="teacher-card reveal"><div class="teacher-avatar"><img src="assets/teacher-sunny.png" alt="Teacher Sunny portrait"></div><div class="teacher-name">Teacher Sunny</div><div class="teacher-title">校長</div><p class="teacher-desc">深耕兒童美語教育超過二十年。以溫暖、專業且有耐心的教學方式，引導孩子建立自信，培養學習興趣，愛上學習英文.</p></div>
-    <div class="teacher-card reveal"><div class="teacher-avatar"><img src="assets/teacher-mina.png" alt="Teacher Mina portrait"></div><div class="teacher-name">Teacher Mina</div><div class="teacher-title">英語教師</div><p class="teacher-desc">擁有英語教學經驗，熟悉台灣學生的學習需求，能以親切、清楚且有耐心的方式引導孩子學習英文。透過互動式教學與生活化課程，幫助學生建立英文基礎，提升口說自信.</p></div>
-    <div class="teacher-card reveal"><div class="teacher-avatar"><img src="assets/teacher-amanda.png" alt="Teacher Amanda portrait"></div><div class="teacher-name">Teacher Amanda</div><div class="teacher-title">補習班老師</div><p class="teacher-desc">擁有豐富的兒童英語教學經驗，擅長以親切、有耐心且有趣的方式引導孩子學習。透過互動式課程與循序漸進的教學方法，幫助學生建立自信，穩定提升英文能力.</p></div>
+  <div class="teachers-grid" data-content="teachers.items">
+    <!-- Populated by content-loader.js from content/teachers.json -->
   </div>
 </section>
 
@@ -437,7 +398,7 @@
       <div class="section-tag">招生資訊</div>
       <h2 style="color:white">現在報名，<br>享受免費試聽！</h2>
       <p class="section-desc" style="color:rgba(255,255,255,0.8)">歡迎家長帶著孩子來感受我們的教學氛圍，第一堂課免費試聽，讓孩子愛上英語從這裡開始！</p>
-      <div class="info-list">
+      <div class="info-list" data-content="contact.info_list">
         <div class="info-item"><span class="info-icon">📍</span><div class="info-text"><strong>地址</strong><a href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" target="_blank" rel="noopener">新北市新莊區五工三路78巷12號</a></div></div>
         <div class="info-item"><span class="info-icon">📞</span><div class="info-text"><strong>電話</strong><a href="tel:0222988881">02 2298 8881</a></div></div>
         <div class="info-item"><span class="info-icon">🕐</span><div class="info-text"><strong>營業時間</strong><span>週一 12:00–21:30｜週二 13:00–21:30<br>週三至週五 12:00–21:30｜週六、週日公休</span></div></div>
@@ -445,13 +406,13 @@
       </div>
       <div class="contact-tools">
         <div class="map-card" aria-label="Athena Language School 地圖">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.077000678028!2d121.45682307560362!3d25.065379177796103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a89118aba345%3A0x13493c1dbe53220e!2sAthena%20Language%20School!5e0!3m2!1sen!2stw!4v1780679179922!5m2!1sen!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Athena Language School map"></iframe>
-          <a class="map-overlay" href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" target="_blank" rel="noopener">📍 開啟 Google 地圖</a>
+          <iframe data-content="contact.map_embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.077000678028!2d121.45682307560362!3d25.065379177796103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a89118aba345%3A0x13493c1dbe53220e!2sAthena%20Language%20School!5e0!3m2!1sen!2stw!4v1780679179922!5m2!1sen!2stw" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Athena Language School map"></iframe>
+          <a class="map-overlay" data-content="contact.map_overlay_link" href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" target="_blank" rel="noopener">📍 開啟 Google 地圖</a>
         </div>
         <div class="line-card">
-          <img src="assets/line-qr.png" alt="Athena Language School LINE QR code">
+          <img data-content="contact.line_qr" src="assets/line-qr.png" alt="Athena Language School LINE QR code">
           <strong>LINE 官方帳號</strong>
-          <a href="https://line.me/R/ti/p/@598uacvs" target="_blank" rel="noopener">@598uacvs</a>
+          <a data-content="contact.line_link" href="https://line.me/R/ti/p/@598uacvs" target="_blank" rel="noopener"><span data-content="contact.line_id">@598uacvs</span></a>
         </div>
       </div>
     </div>
@@ -506,7 +467,7 @@
         <line x1="160" y1="168" x2="458" y2="168" stroke="white" stroke-width="1" opacity="0.3"/>
         <text x="160" y="193" font-family="'Nunito',sans-serif" font-weight="800" font-size="17" fill="white" dominant-baseline="central" letter-spacing="1" opacity="0.85">Athena Language School</text>
       </svg>
-      <p class="sub">Athena Language School<br>新北市新莊區五工三路78巷12號<br>讓每個孩子都能愛上英語！</p>
+      <p class="sub">Athena Language School<br><span data-content="contact.brand_address">新北市新莊區五工三路78巷12號</span><br>讓每個孩子都能愛上英語！</p>
       <div class="social-links">
         <a href="https://www.facebook.com/Athena.Language.School/" class="social-btn" target="_blank" rel="noopener" aria-label="Facebook">📘</a>
         <a href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" class="social-btn" target="_blank" rel="noopener" aria-label="Google Maps">🗺️</a>
@@ -525,15 +486,15 @@
     </div>
     <div class="contact-col">
       <h4>聯絡我們</h4>
-      <div class="contact-detail"><span class="d-icon">📍</span><span class="d-text"><a href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" target="_blank" rel="noopener">新北市新莊區<br>五工三路78巷12號</a></span></div>
-      <div class="contact-detail"><span class="d-icon">📞</span><span class="d-text"><a href="tel:0222988881">02 2298 8881</a></span></div>
-      <div class="contact-detail"><span class="d-icon">⏰</span><span class="d-text">週一 12:00–21:30<br>週二 13:00–21:30<br>週三至週五 12:00–21:30<br>週六、週日公休</span></div>
-      <div class="contact-detail"><span class="d-icon">📘</span><span class="d-text"><a href="https://www.facebook.com/Athena.Language.School/" target="_blank" rel="noopener">Facebook 粉絲專頁</a></span></div>
+      <div class="contact-detail"><span class="d-icon">📍</span><span class="d-text" data-content="contact.footer_address"><a href="https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City" target="_blank" rel="noopener">新北市新莊區<br>五工三路78巷12號</a></span></div>
+      <div class="contact-detail"><span class="d-icon">📞</span><span class="d-text" data-content="contact.footer_phone"><a href="tel:0222988881">02 2298 8881</a></span></div>
+      <div class="contact-detail"><span class="d-icon">⏰</span><span class="d-text" data-content="contact.footer_hours">週一 12:00–21:30<br>週二 13:00–21:30<br>週三至週五 12:00–21:30<br>週六、週日公休</span></div>
+      <div class="contact-detail"><span class="d-icon">📘</span><span class="d-text" data-content="contact.footer_facebook"><a href="https://www.facebook.com/Athena.Language.School/" target="_blank" rel="noopener">Facebook 粉絲專頁</a></span></div>
     </div>
     <div class="contact-col footer-line-card">
       <h4>LINE 官方帳號</h4>
-      <img src="assets/line-qr.png" alt="Athena Language School LINE QR code">
-      <a href="https://line.me/R/ti/p/@598uacvs" target="_blank" rel="noopener">@598uacvs</a>
+      <img data-content="contact.footer_line_qr" src="assets/line-qr.png" alt="Athena Language School LINE QR code">
+      <a data-content="contact.footer_line_link" href="https://line.me/R/ti/p/@598uacvs" target="_blank" rel="noopener"><span data-content="contact.footer_line_id">@598uacvs</span></a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -559,5 +520,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+<script src="content-loader.js"></script>
 </body>
 </html>

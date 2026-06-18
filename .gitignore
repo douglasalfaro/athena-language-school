@@ -4,3 +4,6 @@
 netlify-deploy/
 athena-netlify-site.zip
 *.pdf
+
+# Local Netlify folder
+.netlify

@@ -1,0 +1,25 @@
+{
+  "section_tag": "師資陣容",
+  "section_title": "充滿熱情的專業老師",
+  "section_desc": "每位老師都經過嚴格篩選，不僅英語能力卓越，更擁有豐富的兒童教學經驗與滿滿的愛心。",
+  "items": [
+    {
+      "photo": "assets/teacher-sunny.png",
+      "name": "Teacher Sunny",
+      "title": "校長",
+      "desc": "深耕兒童美語教育超過二十年。以溫暖、專業且有耐心的教學方式，引導孩子建立自信，培養學習興趣，愛上學習英文."
+    },
+    {
+      "photo": "assets/teacher-mina.png",
+      "name": "Teacher Mina",
+      "title": "英語教師",
+      "desc": "擁有英語教學經驗，熟悉台灣學生的學習需求，能以親切、清楚且有耐心的方式引導孩子學習英文。透過互動式教學與生活化課程，幫助學生建立英文基礎，提升口說自信."
+    },
+    {
+      "photo": "assets/teacher-amanda.png",
+      "name": "Teacher Amanda",
+      "title": "補習班老師",
+      "desc": "擁有豐富的兒童英語教學經驗，擅長以親切、有耐心且有趣的方式引導孩子學習。透過互動式課程與循序漸進的教學方法，幫助學生建立自信，穩定提升英文能力."
+    }
+  ]
+}

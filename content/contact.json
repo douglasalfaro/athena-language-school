@@ -1,0 +1,19 @@
+{
+  "address": "新北市新莊區五工三路78巷12號",
+  "address_link": "https://www.google.com/maps/search/?api=1&query=Athena%20Language%20School%20No.%2012%2C%20Lane%2078%2C%20Wugongsan%20Rd%2C%20Xinzhuang%20District%2C%20New%20Taipei%20City",
+  "phone": "02 2298 8881",
+  "phone_link": "tel:0222988881",
+  "hours": "週一 12:00–21:30｜週二 13:00–21:30<br>週三至週五 12:00–21:30｜週六、週日公休",
+  "tuition": "依課程而異，歡迎來電詢問優惠方案",
+  "map_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.077000678028!2d121.45682307560362!3d25.065379177796103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a89118aba345%3A0x13493c1dbe53220e!2sAthena%20Language%20School!5e0!3m2!1sen!2stw!4v1780679179922!5m2!1sen!2stw",
+  "line_qr": "assets/line-qr.png",
+  "line_id": "@598uacvs",
+  "line_link": "https://line.me/R/ti/p/@598uacvs",
+  "facebook_link": "https://www.facebook.com/Athena.Language.School/",
+  "stats": [
+    { "num": "10+", "label": "年豐富教學經驗" },
+    { "num": "500+", "label": "畢業學員" },
+    { "num": "4", "label": "專業師資" },
+    { "num": "98%", "label": "家長滿意度" }
+  ]
+}
