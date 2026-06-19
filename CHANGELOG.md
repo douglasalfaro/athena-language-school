@@ -1,21 +1,53 @@
 # Changelog
 
-All notable changes to this repository are documented here, based on
+All notable changes to this project are documented here, based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
 ### Added
-- Professional `README.md` with banner, badges, overview, features, tech stack,
-  project structure, local-preview and deployment notes.
-- Proprietary `LICENSE` (all rights reserved) and this `CHANGELOG.md`.
+- Comprehensive SEO overhaul: `robots.txt`, `sitemap.xml`, JSON-LD `LocalBusiness`
+  schema (address, phone, hours, courses), `og:image`, canonical URLs, and
+  `<noscript>` teacher-name fallback for Googlebot.
+- Google Search Console property verified and sitemap submitted.
+- Professional `README.md` with badges, table of contents, tech-stack table,
+  project-structure tree, content-management guide, SEO section, and roadmap.
+- Clean `.gitignore` excluding OS files, IDE folders, stale root artifacts, and
+  Netlify build output.
 
-> Documentation only — no changes were made to the website's HTML, assets, or
-> deployment configuration.
+### Changed
+- `README.md` — complete rewrite with shields.io badges, structured sections,
+  and deployment documentation.
+- `LICENSE` — updated copyright year to 2026.
+
+### Removed
+- Stale root-directory files: `athena_school.html`, `netlify-ssl-guide.txt`,
+  orphaned `.jpg` images, and `JOSE.jpg` — all superseded by content in
+  `athena-netlify-site/`.
+
+## [2026-06-18]
+
+### Added
+- Decap CMS admin panel with branded login page (owl logo, school name, slogan,
+  orange/blue color scheme).
+- Netlify Identity integration with Git Gateway for username+password CMS auth.
+- CMS-invited user: `athena2298@gmail.com`.
+- Custom domain `123athena.com` configured on Netlify with GoDaddy DNS
+  (A record → `75.2.60.5`, CNAME → `athena-language-school.netlify.app`).
+- `content-loader.js` — client-side script that fetches JSON data files and
+  populates the DOM via `data-content` attributes.
+- Editable content collections: hero, features, courses, teachers, contact
+  (JSON files in `content/`).
+
+### Changed
+- `index.html` — refactored from hardcoded content to `data-content` attribute
+  pattern for CMS-driven rendering.
+- `admin/index.html` — added branding CSS (owl logo via `::before`, school name
+  via `::after`, orange accent, dark sidebar gradient).
 
 ## [Initial]
 
 ### Added
-- Athena Language School marketing website: bilingual (中文 / English) landing page,
-  course and teacher sections, free-trial sign-up via Netlify Forms, an interactive
-  grammar mini-game, and LINE contact. Deployed on Netlify.
+- Athena Language School marketing website: bilingual (中文 / English) landing
+  page, course and teacher sections, free-trial sign-up via Netlify Forms,
+  interactive grammar mini-game, and LINE contact. Deployed on Netlify.

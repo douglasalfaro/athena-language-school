@@ -1,111 +1,224 @@
 <div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="athena-netlify-site/assets/favicon.svg">
+    <img src="athena-netlify-site/assets/favicon.svg" alt="Athena Language School" width="96" height="96">
+  </picture>
 
-<img src="assets/hero-classroom-students.jpg" alt="Athena Language School" width="100%" style="max-height:320px;object-fit:cover;border-radius:12px;">
+  # 雅喜娜美語補習班 · Athena Language School
 
-# 雅喜娜美語補習班 · Athena Language School
+  **讓孩子愛上說 English！** — 新北市新莊區專業兒童美語補習班
 
-**讓孩子愛上說 English！** — a warm, fun, and effective English-education website for young learners in Taiwan.
+  <br>
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![Netlify](https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white)
-![Bilingual](https://img.shields.io/badge/Bilingual-中文%20%2F%20English-success)
-![License](https://img.shields.io/badge/License-Proprietary-lightgrey)
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/fea016b1-f73b-42a1-b34b-be47e793a5e1/deploy-status)](https://app.netlify.com/sites/athena-language-school/deploys)
+  [![Website](https://img.shields.io/badge/123athena.com-FF6B2B?logo=google-chrome&logoColor=white)](https://123athena.com)
+  [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+  [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+  [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+  [![Decap CMS](https://img.shields.io/badge/CMS-Deca%20CMS-FF6B2B?logo=netlify&logoColor=white)](https://decapcms.org)
+  [![Netlify Identity](https://img.shields.io/badge/Auth-Netlify%20Identity-00C7B7?logo=netlify&logoColor=white)](https://docs.netlify.com/visitor-access/identity/)
+  [![Bilingual](https://img.shields.io/badge/Lang-中文%20%2F%20English-success)](https://123athena.com)
+  [![License](https://img.shields.io/badge/License-Proprietary-lightgrey)](LICENSE)
 
+  <br>
+  <img src="athena-netlify-site/assets/hero-classroom-students.jpg" alt="Athena classroom" width="100%" style="max-width:800px;border-radius:12px;">
 </div>
 
 ---
 
-## ✨ Overview
+## 📋 Table of Contents
 
-Athena Language School (雅喜娜美語補習班) is a children's English cram school in Taiwan. This repository contains its **marketing website** — a fast, responsive, bilingual (Traditional Chinese / English) static site designed to introduce the school's courses and teachers, build trust with parents, and drive **free-trial-class** sign-ups.
-
-The site is hand-built with vanilla HTML, CSS, and JavaScript (no framework, no build step) and is deployed on **Netlify**, using Netlify Forms to capture trial-class enquiries.
+- [Overview](#-overview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Content Management](#-content-management)
+- [Deployment](#-deployment)
+- [SEO & Performance](#-seo--performance)
+- [Roadmap](#-roadmap)
+- [License](#-license)
 
 ---
 
-## 🚀 Features
+## 📖 Overview
 
-- **Bilingual, parent-focused content** — Traditional Chinese with English highlights, written for Taiwanese families.
-- **Course showcase** — programs presented for different age groups.
-- **Teacher profiles** — introductions to the school's teaching team.
-- **Free-trial sign-up** — a Netlify-powered enquiry form with a dedicated `success.html` confirmation page.
-- **Interactive grammar game** — a lightweight `grammar-game.html` mini-game to engage students.
-- **LINE integration** — direct contact via LINE, the primary messaging channel in Taiwan.
-- **Responsive design** — built to read well on phones, where most parents browse.
+Athena Language School (雅喜娜美語補習班) is a children's English-language school in **Xinzhuang District, New Taipei City, Taiwan**. This repository contains its official marketing website — a fast, responsive, bilingual (Traditional Chinese / English) static site designed to:
+
+- Introduce the school's courses and teaching team to prospective parents
+- Build trust through teacher profiles, classroom photos, and a clear value proposition
+- Drive **free trial class** sign-ups via an integrated enquiry form
+- Provide an interactive **grammar mini-game** for current students to practice at home
+
+The site is hand-built with vanilla HTML, CSS, and JavaScript — no framework, no build step, no runtime dependencies. Content is managed through **Decap CMS** (formerly Netlify CMS) with username/password authentication via **Netlify Identity**, so the school staff can update text and images without touching code.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| **Bilingual content** | Traditional Chinese with English highlights, written for Taiwanese families |
+| **Course showcase** | Four age-group programs (ages 4–15) with descriptions and age ranges |
+| **Teacher profiles** | Individual cards with photos, names, titles, and bios for each instructor |
+| **Free-trial sign-up** | Netlify Forms-powered enquiry form with dedicated confirmation page |
+| **Interactive grammar game** | Self-contained word-ordering mini-game for student practice |
+| **LINE integration** | Direct contact via LINE QR code — Taiwan's primary messaging channel |
+| **Responsive design** | Mobile-first layout optimized for phones, tablets, and desktops |
+| **CMS backend** | Decap CMS admin panel at `/admin/` — edit content with username + password |
+| **SEO optimized** | JSON-LD structured data, sitemap, robots.txt, Open Graph tags, canonical URLs |
 
 ---
 
 ## 🛠 Tech Stack
 
-| Area | Technology |
-| --- | --- |
-| **Markup & styling** | HTML5, CSS3 |
-| **Interactivity** | Vanilla JavaScript |
-| **Forms** | Netlify Forms |
-| **Hosting / Deploy** | Netlify |
+| Layer | Technology |
+|---|---|
+| **Markup & Styling** | HTML5, CSS3 (vanilla, no framework) |
+| **Interactivity** | Vanilla JavaScript (ES6+) |
+| **Content Management** | [Decap CMS](https://decapcms.org) v3 |
+| **Authentication** | [Netlify Identity](https://docs.netlify.com/visitor-access/identity/) (username + password) |
+| **Git Gateway** | [Netlify Git Gateway](https://docs.netlify.com/visitor-access/git-gateway/) (commits CMS changes to GitHub) |
+| **Forms** | [Netlify Forms](https://docs.netlify.com/forms/setup/) |
+| **Hosting** | [Netlify](https://www.netlify.com) |
+| **Domain** | `123athena.com` (GoDaddy → Netlify DNS) |
 
 ---
 
 ## 📂 Project Structure
 
 ```
-.
-├── index.html                # Main landing page
-├── grammar-game.html         # Interactive grammar mini-game
-├── success.html              # Form-submission confirmation page
-├── assets/                   # Images (hero photos, teacher portraits, LINE QR)
-└── athena-netlify-site/      # Netlify deploy bundle (site copy served in production)
+athena-language-school/
+├── athena-netlify-site/          # Production deploy directory
+│   ├── index.html                # Main landing page
+│   ├── grammar-game.html         # Interactive grammar mini-game
+│   ├── success.html              # Form-submission confirmation page
+│   ├── robots.txt                # Crawl instructions for search engines
+│   ├── sitemap.xml               # XML sitemap for Google indexing
+│   ├── content-loader.js         # Client-side JS: fetches JSON → populates DOM
+│   ├── admin/
+│   │   ├── index.html            # Decap CMS entry point (branded login)
+│   │   └── config.yml            # CMS collection definitions
+│   ├── content/                  # Editable JSON data files (CMS-managed)
+│   │   ├── hero.json
+│   │   ├── features.json
+│   │   ├── courses.json
+│   │   ├── teachers.json
+│   │   └── contact.json
+│   └── assets/                   # Static assets
+│       ├── favicon.svg           # School owl logo
+│       ├── hero-*.jpg            # Hero / classroom photographs
+│       ├── teacher-*.png         # Teacher portraits
+│       └── line-qr.png           # LINE contact QR code
+├── .gitignore
+├── CHANGELOG.md
+├── LICENSE
+└── README.md                     # This file
 ```
-
-> The site is static — open the HTML files directly or serve the folder locally; no build step or environment variables are required.
 
 ---
 
-## 💻 Run Locally
+## 🚀 Getting Started
 
-Because the site is fully static, you can preview it with any static file server:
+### Prerequisites
+
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- (Optional) [Python 3](https://python.org) or [Node.js](https://nodejs.org) for local preview
+
+### Local Preview
 
 ```bash
 git clone https://github.com/douglasalfaro/athena-language-school.git
-cd athena-language-school
+cd athena-language-school/athena-netlify-site
 
-# Option A: open index.html directly in your browser
-# Option B: serve it locally
-python -m http.server 8000
-# then visit http://localhost:8000
+# Option A: Python
+python3 -m http.server 8000
+# → http://localhost:8000
+
+# Option B: Node.js (npx)
+npx serve .
+# → http://localhost:3000
 ```
+
+> The site is fully static — no build step, no environment variables, no database required.
+
+---
+
+## 📝 Content Management
+
+The school staff can edit website content through a browser-based admin panel:
+
+1. Visit **https://123athena.com/admin/**
+2. Log in with the school's Netlify Identity credentials (username + password)
+3. Edit text, images, teacher bios, course descriptions, and contact info
+4. Click **Publish** — changes are committed to GitHub and deployed automatically
+
+### Editable Collections
+
+| Collection | Fields |
+|---|---|
+| **Hero** | Headline, subtitle, background image, CTA text |
+| **Features** | Feature cards (icon, title, description) — add / remove / reorder |
+| **Courses** | Course name, age range, description, highlights — add / remove / reorder |
+| **Teachers** | Name, title, bio, photo — add / remove / reorder |
+| **Contact** | Address, phone, email, LINE QR, business hours |
 
 ---
 
 ## 🚢 Deployment
 
-The site is deployed on **Netlify**. Pushing to the default branch publishes the latest version, and the trial-class form is handled by Netlify Forms (submissions redirect to `success.html`).
+The site is hosted on **Netlify** and deployed from the `athena-netlify-site/` directory.
+
+| Method | Trigger |
+|---|---|
+| **Git push** | Pushing to `master` triggers an automatic Netlify build |
+| **CLI** | `npx netlify-cli deploy --prod --dir=athena-netlify-site` |
+| **CMS publish** | Publishing in Decap CMS commits to GitHub → auto-deploys |
+
+**Live URL:** [https://123athena.com](https://123athena.com)
 
 ---
 
-## 🔭 Future Improvements
+## 🔍 SEO & Performance
 
-- Consolidate image assets and remove unused source photos to slim the repo.
-- Add Open Graph / structured-data metadata for richer link previews and local SEO.
-- Add basic analytics to measure trial-sign-up conversion.
-- Optimize and lazy-load images for faster mobile loading.
+The site is optimized for local search in the Xinzhuang / New Taipei City area:
+
+- **JSON-LD structured data** — `LocalBusiness` schema with address, phone, hours, and course catalog for rich Google results
+- **XML sitemap** — submitted to Google Search Console for full page discovery
+- **`robots.txt`** — crawl instructions for all major search engines
+- **Open Graph tags** — `og:title`, `og:description`, `og:image`, `og:url` for social sharing
+- **Canonical URLs** — prevents duplicate content penalties
+- **Semantic HTML** — `section`, `nav`, `header`, `footer` with meaningful `id` attributes
+- **Lazy-loaded images** — `loading="lazy"` on below-the-fold assets
+- **Responsive images** — viewport-aware layout with CSS media queries
+- **Google Search Console** — property verified, sitemap submitted, indexing requested
 
 ---
 
-## 👤 About the Developer
+## 🗺 Roadmap
 
-**Douglas Alfaro** is a full-stack developer with experience building practical business
-solutions using modern web technologies, automation, APIs, and cloud-based tools. His work
-focuses on creating useful, scalable applications for real-world business problems.
-
-- GitHub: [@douglasalfaro](https://github.com/douglasalfaro)
+- [x] Core landing page with courses, teachers, and contact
+- [x] Interactive grammar mini-game
+- [x] Decap CMS integration with Netlify Identity
+- [x] Custom domain (123athena.com) with Netlify DNS
+- [x] SEO essentials (sitemap, robots.txt, JSON-LD, OG tags)
+- [ ] Google Analytics or Plausible for conversion tracking
+- [ ] Image optimization (WebP conversion, responsive srcset)
+- [ ] Performance audit (Lighthouse score targets: 90+)
+- [ ] Blog / news section for school announcements
 
 ---
 
 ## 📄 License
 
-© Athena Language School / Douglas Alfaro. All rights reserved. See [LICENSE](LICENSE).
+**Proprietary** — All rights reserved. See [LICENSE](LICENSE).
 
-The website content, branding, and photographs are proprietary and may not be reused without permission.
+The website content, branding, school photographs, and teacher portraits are proprietary and may not be reused without written permission.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ for Athena Language School · 雅喜娜美語補習班</sub>
+  <br>
+  <sub>新北市新莊區五工三路78巷12號 · <a href="tel:+886-2-2298-8881">02-2298-8881</a></sub>
+</div>

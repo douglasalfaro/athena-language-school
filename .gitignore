@@ -1,9 +1,31 @@
+# OS files
 .DS_Store
+Thumbs.db
+
+# IDE / editor
 .qwen/
 .claude/
-netlify-deploy/
-athena-netlify-site.zip
-*.pdf
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# Local Netlify folder
+# Netlify
 .netlify
+netlify-deploy/
+
+# Archives
+*.zip
+*.tar.gz
+
+# Stale root files (moved to athena-netlify-site/)
+athena_school.html
+netlify-ssl-guide.txt
+298773091_570606361434655_9167292172873248518_n*.jpg
+475850513_1142074607621158_3916209062891084133_n.jpg
+81A4F381-DA87-4330-8EAA-F6EFE604DBE0.jpg
+E993F105-B5A6-4462-A1F3-56CC3E401166.jpg
+JOSE.jpg
+
+# Design proposals (not part of the website)
+*.docx.pdf
