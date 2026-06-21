@@ -1,0 +1,11 @@
+name: Athena Health Check
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - run: echo "ready"
