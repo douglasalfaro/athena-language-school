@@ -17,10 +17,10 @@ for s in "$HP" "$AD" "$GR" "$SI" "$RO"; do
 done
 
 if [ "$FAILURES" -gt 0 ]; then
-  OVERALL="&#128308; $FAILURES page(s) need attention"
+  OVERALL="🔴 $FAILURES page(s) need attention"
   OC="#dc2626"
 else
-  OVERALL="&#9989; All pages healthy"
+  OVERALL="✅ All pages healthy"
   OC="#16a34a"
 fi
 
