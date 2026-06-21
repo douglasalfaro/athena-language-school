@@ -17,7 +17,7 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
-              "from": "Athena Health Check <health@123athena.com>",
+              "from": "Athena Health Check <health@alphacooltech.com>",
               "to": ["douglas@alphacooltech.com"],
               "subject": "Athena School - Health Check Test",
               "text": "Health check ran successfully at $(date -u)"
