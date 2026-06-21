@@ -1,0 +1,24 @@
+name: Athena Health Check
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: echo "Health check running"
+      - name: Send email
+        run: |
+          curl -s -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "Athena Health Check <health@123athena.com>",
+              "to": ["douglas@alphacooltech.com"],
+              "subject": "Athena School - Health Check Test",
+              "text": "Health check ran successfully at $(date -u)"
+            }'
