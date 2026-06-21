@@ -85,15 +85,20 @@ jobs:
           fi
           cat report.md
 
-      - name: Send email via SendGrid
+      - name: Send email via Resend
         if: always()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.sendgrid.net
-          server_port: 587
-          username: apikey
-          password: ${{ secrets.SENDGRID_API_KEY }}
-          subject: "🏛 Athena School — Weekly Health Check (${{ job.status }})"
-          to: douglas@alphacooltech.com
-          from: Athena Health Check <health@123athena.com>
-          body: file://report.md
+        run: |
+          BODY=$(cat report.md | python3 -c "
+import sys, json
+lines = sys.stdin.read()
+print(json.dumps(lines))
+")
+          curl -s -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "from": "Athena Health Check <health@123athena.com>",
+              "to": ["douglas@alphacooltech.com"],
+              "subject": "🏛 Athena School — Weekly Health Check (${{ job.status }})",
+              "text": '"$BODY"'
+            }'
