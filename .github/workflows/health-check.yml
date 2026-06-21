@@ -1,0 +1,99 @@
+name: Weekly Health Check
+
+on:
+  schedule:
+    # Every Monday at 9:00 AM Asia/Taipei (UTC+8) = 1:00 AM UTC
+    - cron: '0 1 * * 1'
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
+
+jobs:
+  health-check:
+    name: Site Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check homepage
+        id: homepage
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Homepage returned $STATUS"
+
+      - name: Check admin page
+        id: admin
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/admin/")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Admin page returned $STATUS"
+
+      - name: Check grammar game
+        id: grammar
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/grammar-game.html")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Grammar game returned $STATUS"
+
+      - name: Check sitemap
+        id: sitemap
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/sitemap.xml")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Sitemap returned $STATUS"
+
+      - name: Check robots.txt
+        id: robots
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/robots.txt")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Robots.txt returned $STATUS"
+
+      - name: Check SSL certificate expiry
+        id: ssl
+        run: |
+          EXPIRY=$(echo | openssl s_client -servername 123athena.com -connect 123athena.com:443 2>/dev/null | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+          echo "expiry=$EXPIRY" >> $GITHUB_OUTPUT
+          echo "SSL expires: $EXPIRY"
+
+      - name: Build summary
+        id: summary
+        run: |
+          echo "## 🏛 Athena Language School — Weekly Health Check" > report.md
+          echo "" >> report.md
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> report.md
+          echo "" >> report.md
+          echo "| Page | Status |" >> report.md
+          echo "|------|--------|" >> report.md
+          echo "| Homepage | ${{ steps.homepage.outputs.status }} |" >> report.md
+          echo "| Admin | ${{ steps.admin.outputs.status }} |" >> report.md
+          echo "| Grammar Game | ${{ steps.grammar.outputs.status }} |" >> report.md
+          echo "| Sitemap | ${{ steps.sitemap.outputs.status }} |" >> report.md
+          echo "| robots.txt | ${{ steps.robots.outputs.status }} |" >> report.md
+          echo "" >> report.md
+          echo "**SSL Certificate Expires:** ${{ steps.ssl.outputs.expiry }}" >> report.md
+          echo "" >> report.md
+          FAILURES=0
+          for s in "${{ steps.homepage.outputs.status }}" "${{ steps.admin.outputs.status }}" "${{ steps.grammar.outputs.status }}" "${{ steps.sitemap.outputs.status }}" "${{ steps.robots.outputs.status }}"; do
+            if [ "$s" != "200" ]; then
+              FAILURES=$((FAILURES + 1))
+            fi
+          done
+          if [ "$FAILURES" -gt 0 ]; then
+            echo "**⚠️ $FAILURES page(s) returned non-200 status — needs attention!**" >> report.md
+          else
+            echo "**✅ All pages healthy.**" >> report.md
+          fi
+          cat report.md
+
+      - name: Send email via SendGrid
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.sendgrid.net
+          server_port: 587
+          username: apikey
+          password: ${{ secrets.SENDGRID_API_KEY }}
+          subject: "🏛 Athena School — Weekly Health Check (${{ job.status }})"
+          to: douglas@alphacooltech.com
+          from: Athena Health Check <health@123athena.com>
+          body: file://report.md
