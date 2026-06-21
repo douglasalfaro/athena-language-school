@@ -84,10 +84,7 @@ import sys, json
 lines = sys.stdin.read()
 print(json.dumps(lines))
 ")
-          curl -s -X POST "https://api.resend.com/emails" \
-            -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{
+          curl -s -X POST "https://api.resend.com/emails"             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}"             -H "Content-Type: application/json"             -d '{
               "from": "Athena Health Check <health@alphacooltech.com>",
               "to": ["douglas@alphacooltech.com"],
               "subject": "Athena School - Weekly Health Check (${{ job.status }})",
