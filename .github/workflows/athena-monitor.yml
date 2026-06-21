@@ -1,0 +1,92 @@
+name: Athena Health Check
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check homepage
+        id: homepage
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+      - name: Check admin page
+        id: admin
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/admin/")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+      - name: Check grammar game
+        id: grammar
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/grammar-game.html")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+      - name: Check sitemap
+        id: sitemap
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/sitemap.xml")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+      - name: Check robots.txt
+        id: robots
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://123athena.com/robots.txt")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+
+      - name: Check SSL certificate expiry
+        id: ssl
+        run: |
+          EXPIRY=$(echo | openssl s_client -servername 123athena.com -connect 123athena.com:443 2>/dev/null | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+          echo "expiry=$EXPIRY" >> $GITHUB_OUTPUT
+
+      - name: Build summary
+        id: summary
+        run: |
+          echo "## Athena Language School - Weekly Health Check" > report.md
+          echo "" >> report.md
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> report.md
+          echo "" >> report.md
+          echo "| Page | Status |" >> report.md
+          echo "|------|--------|" >> report.md
+          echo "| Homepage | ${{ steps.homepage.outputs.status }} |" >> report.md
+          echo "| Admin | ${{ steps.admin.outputs.status }} |" >> report.md
+          echo "| Grammar Game | ${{ steps.grammar.outputs.status }} |" >> report.md
+          echo "| Sitemap | ${{ steps.sitemap.outputs.status }} |" >> report.md
+          echo "| robots.txt | ${{ steps.robots.outputs.status }} |" >> report.md
+          echo "" >> report.md
+          echo "**SSL Certificate Expires:** ${{ steps.ssl.outputs.expiry }}" >> report.md
+          echo "" >> report.md
+          FAILURES=0
+          for s in "${{ steps.homepage.outputs.status }}" "${{ steps.admin.outputs.status }}" "${{ steps.grammar.outputs.status }}" "${{ steps.sitemap.outputs.status }}" "${{ steps.robots.outputs.status }}"; do
+            if [ "$s" != "200" ]; then
+              FAILURES=$((FAILURES + 1))
+            fi
+          done
+          if [ "$FAILURES" -gt 0 ]; then
+            echo "** $FAILURES page(s) returned non-200 status - needs attention!**" >> report.md
+          else
+            echo "**All pages healthy.**" >> report.md
+          fi
+          cat report.md
+
+      - name: Send email via Resend
+        if: always()
+        run: |
+          BODY=$(cat report.md | python3 -c "
+import sys, json
+lines = sys.stdin.read()
+print(json.dumps(lines))
+")
+          curl -s -X POST "https://api.resend.com/emails"             -H "Authorization: Bearer ${{ secrets.RESEND_API_KEY }}"             -H "Content-Type: application/json"             -d '{
+              "from": "Athena Health Check <health@alphacooltech.com>",
+              "to": ["douglas@alphacooltech.com"],
+              "subject": "Athena School - Weekly Health Check (${{ job.status }})",
+              "text": '"$BODY"'
+            }'
