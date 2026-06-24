@@ -2,8 +2,10 @@ backend:
   name: git-gateway
   branch: master
 
-media_folder: "assets"
-public_folder: "assets"
+publish_mode: editorial_workflow
+
+media_folder: "athena-netlify-site/assets"
+public_folder: "/assets"
 
 # Athena School branding
 logo_url: "../assets/favicon.svg"
@@ -19,15 +21,11 @@ collections:
     label: "首頁主視覺"
     label_singular: "主視覺"
     description: "編輯首頁的標語、副標題、特色亮點與照片"
-    folder: "content"
-    create: false
-    delete: false
     format: "json"
-    slug: "hero"
     files:
       - label: "主視覺設定"
         name: "hero"
-        file: "content/hero.json"
+        file: "athena-netlify-site/content/hero.json"
         fields:
           - { label: "標籤", name: "tag", widget: "string" }
           - { label: "標題 (支援 HTML)", name: "title", widget: "text" }
@@ -51,15 +49,11 @@ collections:
     label: "特色介紹"
     label_singular: "特色"
     description: "編輯「為什麼選擇我們」區塊的內容"
-    folder: "content"
-    create: false
-    delete: false
     format: "json"
-    slug: "features"
     files:
       - label: "特色設定"
         name: "features"
-        file: "content/features.json"
+        file: "athena-netlify-site/content/features.json"
         fields:
           - { label: "區塊標籤", name: "section_tag", widget: "string" }
           - { label: "區塊標題", name: "section_title", widget: "string" }
@@ -76,15 +70,11 @@ collections:
     label: "課程介紹"
     label_singular: "課程"
     description: "編輯課程內容、年齡、說明與標籤"
-    folder: "content"
-    create: false
-    delete: false
     format: "json"
-    slug: "courses"
     files:
       - label: "課程設定"
         name: "courses"
-        file: "content/courses.json"
+        file: "athena-netlify-site/content/courses.json"
         fields:
           - { label: "區塊標籤", name: "section_tag", widget: "string" }
           - { label: "區塊標題", name: "section_title", widget: "string" }
@@ -103,15 +93,11 @@ collections:
     label: "師資陣容"
     label_singular: "老師"
     description: "編輯老師的照片、姓名、職稱與介紹"
-    folder: "content"
-    create: false
-    delete: false
     format: "json"
-    slug: "teachers"
     files:
       - label: "師資設定"
         name: "teachers"
-        file: "content/teachers.json"
+        file: "athena-netlify-site/content/teachers.json"
         fields:
           - { label: "區塊標籤", name: "section_tag", widget: "string" }
           - { label: "區塊標題", name: "section_title", widget: "string" }
@@ -129,15 +115,11 @@ collections:
     label: "聯絡資訊"
     label_singular: "聯絡資訊"
     description: "編輯地址、電話、營業時間、地圖與 LINE 資訊"
-    folder: "content"
-    create: false
-    delete: false
     format: "json"
-    slug: "contact"
     files:
       - label: "聯絡設定"
         name: "contact"
-        file: "content/contact.json"
+        file: "athena-netlify-site/content/contact.json"
         fields:
           - { label: "地址", name: "address", widget: "string" }
           - { label: "地址連結", name: "address_link", widget: "string" }
@@ -156,3 +138,6 @@ collections:
             fields:
               - { label: "數字", name: "num", widget: "string" }
               - { label: "標籤", name: "label", widget: "string" }
+
+# Build hook — triggers Netlify deploy after CMS publish
+# https://api.netlify.com/build_hooks/6a3bb966dcda5653f32d0b8c
