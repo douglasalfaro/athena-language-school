@@ -6,6 +6,26 @@ All notable changes to this project are documented here, based on
 ## [Unreleased]
 
 ### Added
+- Decap CMS admin panel at `/admin/index.html` with Netlify Identity + Git Gateway
+  — 5 collections: hero, features, courses, teachers, contact.
+- `content-loader.js` — fetches JSON from `/content/` and populates DOM via
+  `data-content` attributes, with HTML fallback.
+- `publish_mode: editorial_workflow` in CMS config for staged publishing.
+- Netlify build hook for auto-deploy after CMS publish.
+
+### Changed
+- `athena-netlify-site/admin/config.yml` — all file paths updated to
+  `athena-netlify-site/content/...` and `media_folder` to
+  `athena-netlify-site/assets/` to match deploy directory.
+- `athena-netlify-site/index.html` — added Netlify Identity widget for password
+  reset flow.
+
+### Fixed
+- CMS changes not appearing on live site — root cause: site deployed via CLI,
+  not linked to GitHub for auto-deploy. Fixed by adding build hook URL to config
+  and triggering deploys via API.
+
+### Added
 - Comprehensive SEO overhaul: `robots.txt`, `sitemap.xml`, JSON-LD `LocalBusiness`
   schema (address, phone, hours, courses), `og:image`, canonical URLs, and
   `<noscript>` teacher-name fallback for Googlebot.
