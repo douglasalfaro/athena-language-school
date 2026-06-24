@@ -139,5 +139,4 @@ collections:
               - { label: "數字", name: "num", widget: "string" }
               - { label: "標籤", name: "label", widget: "string" }
 
-# Build hook — triggers Netlify deploy after CMS publish
-# https://api.netlify.com/build_hooks/6a3bb966dcda5653f32d0b8c
+build_hook_url: https://api.netlify.com/build_hooks/6a3bb966dcda5653f32d0b8c
